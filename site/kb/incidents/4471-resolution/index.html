@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../../../_app/immutable/entry/start.Cxtb4qjO.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/CGN5jdAV.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/CglfBJnd.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/D4AxzcWg.js" rel="modulepreload">
+		<link href="../../../_app/immutable/entry/app.Dkro9rBe.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/DVLsaOwz.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/D8MaX8Q3.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/Dj88hTj6.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/Dg0PkTzR.js" rel="modulepreload">
+		<link href="../../../_app/immutable/nodes/0.C7H_LTCb.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/DcGXnNKE.js" rel="modulepreload">
+		<link href="../../../_app/immutable/nodes/7.ou4UEQ6F.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/CwYCTWhA.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/DwrCouIR.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/CeXhEeKc.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/UN5XaJAF.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/B4gcYFh4.js" rel="modulepreload">
+		<!--e2jw2j--><!----><title>#4471 · Engineering resolution: fixed versus retired · support kb</title>
+		<link href="../../../_app/immutable/assets/runbook.BhhgOc_n.css" rel="stylesheet">
+		<link href="../../../_app/immutable/assets/ticket-links.DuKfINX_.css" rel="stylesheet">
+		<link href="../../../_app/immutable/assets/RenderStamp.CMZ6TBbc.css" rel="stylesheet">
+  </head>
+  <body data-sveltekit-preload-data="hover">
+    <div style="display: contents"><!--[--><!--[0--><!--[--><!--[--><div class="kb svelte-e2jw2j"><header><a class="crumb svelte-e2jw2j" href="/kb">support desk · kb</a> <h1 class="svelte-e2jw2j">#4471 · Engineering resolution: fixed versus retired</h1> <p class="meta svelte-e2jw2j"><span>owner <b>manojparvathaneni</b></span> <span class="status closed svelte-e2jw2j">closed</span> <span class="svelte-e2jw2j">reviewed 2026-10-28 · 0 days ago</span></p></header> <!--[-1--><!--]--> <main><h2>What changed after the first submission</h2> <p>The <a href="https://hq.mega.dev/challenges/what-it-shows" rel="nofollow">course’s engineering update</a> now says
+source ticket #4471 closed on 5 October:</p> <table><thead><tr><th>Cause</th><th>Engineering outcome</th><th>Evidence</th><th>GitHub closure</th></tr></thead><tbody><tr><td>parser</td><td>FIXED</td><td><code>fix(dates): parse dd/mm for eu locales</code></td><td>completed</td></tr><tr><td>hint</td><td>WON’T FIX</td><td>booking-v3 form retired</td><td>not planned</td></tr></tbody></table> <p>These are different resolutions. A retired form is not a repaired hint.
+The parser ticket closes as completed because engineering reports a fix; the hint ticket
+closes as not planned because the affected form was retired. Neither is a duplicate of
+the other.</p> <p>The first closure incorrectly marked both tickets completed. The hint ticket was reopened
+and reclosed with the correct reason, with the original history retained.
+The engineering update is the source of the outcome; this workspace did not execute or
+independently verify the production fix.</p> <h2>Keep the original report counts</h2> <p class="sum svelte-12oyimm"><strong>412</strong> reports merged into #4471 · <strong>2</strong> causes</p> <table><thead><tr><th>cause</th><th>reports</th><th>tagged as</th><th>tenants</th><th>seen</th><th></th></tr></thead><tbody><!--[--><tr class="svelte-12oyimm"><td class="svelte-12oyimm"><code>parser</code></td><td class="svelte-12oyimm">379</td><td class="tags svelte-12oyimm">parser ×356 · hint ×23</td><td class="svelte-12oyimm">11</td><td class="svelte-12oyimm">2026-04-01 → 2026-10-04</td><td class="svelte-12oyimm"><!--[0--><a href="https://github.com/manojparvathaneni/mega-s01e03-what-it-shows/issues/2">parser ticket</a><!--]--></td></tr><tr class="svelte-12oyimm wrong"><td class="svelte-12oyimm"><code>hint</code></td><td class="svelte-12oyimm">33</td><td class="tags svelte-12oyimm">hint ×18 · parser ×15</td><td class="svelte-12oyimm">3</td><td class="svelte-12oyimm">2026-04-17 → 2026-09-22</td><td class="svelte-12oyimm"><!--[0--><a href="https://github.com/manojparvathaneni/mega-s01e03-what-it-shows/issues/1">hint ticket</a><!--]--></td></tr><!--]--></tbody></table> <!--[--><!--[0--><p class="note svelte-12oyimm">5 reports read as a one-day move; filed under <code>parser</code> by tenant.</p><!--]--><!--[-1--><!--]--><!--]--><!----> <p>The export is still the 4 October snapshot. Closing the tickets does not change those
+counts, rewrite the source merges, or establish that a retired form was fixed.
+The <a href="/kb/decisions/0003-signed-4471-review">signed cause review</a> contains the deduplication
+method, tag disagreements, one-day-report caveat, timeline, and interactive counterexamples.
+The accepted decisions remain unchanged.</p> <h2>Desk follow-up</h2> <p>The <a href="/kb/triage/dedupe">active triage rule</a> still requires matching causes rather than
+matching subjects. For a new report, verify its actual form version and current engineering
+status before routing it; the historical classifier is not proof that booking-v3 still runs.
+Re-read the desk update before closing, because the export and an earlier submission do
+not freeze the desk’s work.</p> <!--[0--><p class="stamp svelte-1280m42">desk ref <b class="svelte-1280m42">DR-QW1A-2WXZ</b></p><!--]--><!----><!----></main> <footer class="svelte-e2jw2j">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!--]--><!----><!--]--><!--]--> <!--[-1--><!--]--><!--]-->
+			
+			<script>
+				{
+					__sveltekit_y1143j = {
+						base: new URL("../../..", location).pathname.slice(0, -1)
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("../../../_app/immutable/entry/start.Cxtb4qjO.js"),
+						import("../../../_app/immutable/entry/app.Dkro9rBe.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 7],
+							data: [null,null],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+  </body>
+</html>

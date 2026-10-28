@@ -38,3 +38,10 @@ Intake tags and browser locale are not substitutes for the tenant directory.
 Keep the report separate and request the missing evidence. An unknown tenant or unsupported
 case must not be merged on subject alone. The date classifier covers the known parser and
 hint problems, not every product handled by the desk.
+
+## Check current engineering status
+
+The [engineering resolution](/kb/incidents/4471-resolution) reports the parser fixed and
+booking-v3 retired on 5 October. Confirm a new report's actual form version and current
+status; do not assume the historical snapshot describes a form still in service.
+Close fixed work as completed and retired work as not planned, not as the same outcome.

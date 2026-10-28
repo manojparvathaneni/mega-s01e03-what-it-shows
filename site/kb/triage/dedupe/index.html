@@ -3,23 +3,23 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="../../../_app/immutable/entry/start.D4XFn8fo.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/CUxTeZu7.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/CwyeyBJu.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/08d7zX0-.js" rel="modulepreload">
-		<link href="../../../_app/immutable/entry/app.DW8jtihm.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/DR_OoEFg.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/CsNMRBdl.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/C5-3rxqd.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/MsuaNkiB.js" rel="modulepreload">
-		<link href="../../../_app/immutable/nodes/0.DMr4xRR_.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/DEaOKPZg.js" rel="modulepreload">
-		<link href="../../../_app/immutable/nodes/7.C7R011_A.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/DcCWeJSF.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/CxltGZex.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/DixDie_W.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/CgyRyI6o.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/DOw4tSAN.js" rel="modulepreload">
+    <link href="../../../_app/immutable/entry/start.Cxtb4qjO.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/CGN5jdAV.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/CglfBJnd.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/D4AxzcWg.js" rel="modulepreload">
+		<link href="../../../_app/immutable/entry/app.Dkro9rBe.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/DVLsaOwz.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/D8MaX8Q3.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/Dj88hTj6.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/Dg0PkTzR.js" rel="modulepreload">
+		<link href="../../../_app/immutable/nodes/0.C7H_LTCb.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/DcGXnNKE.js" rel="modulepreload">
+		<link href="../../../_app/immutable/nodes/8.CXJ4oBdJ.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/C6ldct_H.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/DwrCouIR.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/DQUxgbKu.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/UN5XaJAF.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/jhGhRjxa.js" rel="modulepreload">
 		<!--e2jw2j--><!----><title>Triage: duplicate reports · support kb</title>
 		<link href="../../../_app/immutable/assets/runbook.BhhgOc_n.css" rel="stylesheet">
 		<link href="../../../_app/immutable/assets/DedupeExplorer.C3mwiGDj.css" rel="stylesheet">
@@ -30,22 +30,25 @@
 and merge every duplicate into it, so engineering sees one thread with a count.</p> <h2>The rule</h2> <p>A report belongs with an open ticket when evidence establishes the <strong>same cause</strong> (<a href="/kb/decisions/0003-signed-4471-review">decision 0003</a>, replacing the unchanged <a href="/kb/decisions/0001-dedupe-by-subject">decision 0001</a>):</p> <ol><li>read the report and look up its tenant, locale, booking-form version, and channel;</li> <li>for the known date causes, evaluate <code>causeOf</code> and check <code>sameCause</code>;</li> <li>merge only when the cause is established as the same; otherwise keep reports separate.</li></ol> <aside class="note svelte-17bri61"><!---->Matching subjects can hide different causes; different subjects can describe the same cause.
 Intake tags and browser locale are not substitutes for the tenant directory.<!----></aside><!----> <h2>Try it</h2> <div class="try svelte-gq0h2h"><!--[--><fieldset class="svelte-gq0h2h"><legend>report A</legend> <select aria-label="tenant"><!--[--><option selected="">alder.physio</option><option>copper.studio</option><option>harbour.dental</option><option>kettle.books</option><option>lantern.row</option><option>long.table</option><option>morrow.tax</option><option>nine.lanterns</option><option>pale.harbour</option><option>ridge.clinic</option><option>stone.and.sons</option><!--]--></select> <select aria-label="channel"><!--[--><option>app</option><option>email</option><option selected="">form</option><!--]--></select> <input value="Booking on the wrong date" aria-label="subject"/> <code>hint</code></fieldset><fieldset class="svelte-gq0h2h"><legend>report B</legend> <select aria-label="tenant"><!--[--><option>alder.physio</option><option>copper.studio</option><option>harbour.dental</option><option selected="">kettle.books</option><option>lantern.row</option><option>long.table</option><option>morrow.tax</option><option>nine.lanterns</option><option>pale.harbour</option><option>ridge.clinic</option><option>stone.and.sons</option><!--]--></select> <select aria-label="channel"><!--[--><option>app</option><option>email</option><option selected="">form</option><!--]--></select> <input value="Booking on the wrong date" aria-label="subject"/> <code>parser</code></fieldset><!--]--> <p class="verdict svelte-gq0h2h">different causes — keep apart</p></div> <table><thead><tr><th>case</th><th>same subject</th><th>same cause</th></tr></thead><tbody><!--[--><tr><td>app vs email, same tenant</td><td>no</td><td class="svelte-gq0h2h dup">yes</td></tr><tr><td>same subject, same tenant, different channel</td><td>yes</td><td class="svelte-gq0h2h">no</td></tr><tr><td>same subject, same channel, different tenant</td><td>yes</td><td class="svelte-gq0h2h">no</td></tr><tr><td>different subject, same way in</td><td>no</td><td class="svelte-gq0h2h dup">yes</td></tr><tr><td>no tenant on file</td><td>yes</td><td class="svelte-gq0h2h">no</td></tr><!--]--></tbody></table><!----> <h2>When you are unsure</h2> <p>Keep the report separate and request the missing evidence. An unknown tenant or unsupported
 case must not be merged on subject alone. The date classifier covers the known parser and
-hint problems, not every product handled by the desk.</p><!----></main> <footer class="svelte-e2jw2j">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!--]--><!----><!--]--><!--]--> <!--[-1--><!--]--><!--]-->
+hint problems, not every product handled by the desk.</p> <h2>Check current engineering status</h2> <p>The <a href="/kb/incidents/4471-resolution">engineering resolution</a> reports the parser fixed and
+booking-v3 retired on 5 October. Confirm a new report’s actual form version and current
+status; do not assume the historical snapshot describes a form still in service.
+Close fixed work as completed and retired work as not planned, not as the same outcome.</p><!----></main> <footer class="svelte-e2jw2j">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!--]--><!----><!--]--><!--]--> <!--[-1--><!--]--><!--]-->
 			
 			<script>
 				{
-					__sveltekit_157f4fl = {
+					__sveltekit_y1143j = {
 						base: new URL("../../..", location).pathname.slice(0, -1)
 					};
 
 					const element = document.currentScript.parentElement;
 
 					Promise.all([
-						import("../../../_app/immutable/entry/start.D4XFn8fo.js"),
-						import("../../../_app/immutable/entry/app.DW8jtihm.js")
+						import("../../../_app/immutable/entry/start.Cxtb4qjO.js"),
+						import("../../../_app/immutable/entry/app.Dkro9rBe.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
-							node_ids: [0, 7],
+							node_ids: [0, 8],
 							data: [null,null],
 							form: null,
 							error: null

@@ -130,3 +130,16 @@ test('active KB routes and index point the working desk at the replacement decis
   const incident = read('../site/kb/incidents/4471/index.html');
   for (const url of Object.values(issueLinks)) assert.ok(incident.includes(url));
 });
+
+test('the signed resolution distinguishes the reported fix from form retirement', () => {
+  const resolution = read('../site/kb/incidents/4471-resolution/index.html');
+  const plain = resolution.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ');
+  assert.match(plain, /parser\s+FIXED\s+fix\(dates\): parse dd\/mm for eu locales\s+completed/);
+  assert.match(plain, /hint\s+WON['\u2019]T FIX\s+booking-v3 form retired\s+not planned/);
+  assert.match(plain, /parser\s+379/);
+  assert.match(plain, /hint\s+33/);
+  const signature = decision.match(/^signature: '([^']+)'$/m)[1];
+  assert.ok(plain.includes(deskRef(signature)));
+  assert.ok(read('../site/kb/incidents/4471/index.html').includes('/kb/incidents/4471-resolution'));
+  assert.ok(read('../site/kb/triage/dedupe/index.html').includes('/kb/incidents/4471-resolution'));
+});

@@ -1,0 +1,1 @@
+import{a as o,f as i}from"./D8MaX8Q3.js";import{w as m,z as p,C as f}from"./CGN5jdAV.js";import{s as l}from"./DcGXnNKE.js";import{s as d,c as n}from"./DwrCouIR.js";import{p as c}from"./Dj88hTj6.js";var v=i("<aside><!></aside>");function x(e,s){let r=c(s,"kind",3,"note");var a=v(),t=p(a);l(t,()=>s.children),f(a),m(()=>d(a,1,n(r()),"svelte-17bri61")),o(e,a)}export{x as C};

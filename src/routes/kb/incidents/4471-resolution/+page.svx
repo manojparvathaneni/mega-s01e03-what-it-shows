@@ -1,0 +1,54 @@
+---
+layout: runbook
+title: '#4471 · Engineering resolution: fixed versus retired'
+owner: manojparvathaneni
+status: closed
+reviewed: 2026-10-28
+signature: 'v1.eyJzdWIiOiIzMzc3IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyMjQzOTgsImV4cCI6MTc5MzMxMDc5OH0.Smb7POdVwEMUGi65fawQ_QioOIOoxb49CIEZbWQ-Y4o'
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+  import { issueLinks } from '#lib/kb/ticket-links';
+</script>
+
+## What changed after the first submission
+
+The [course's engineering update](https://hq.mega.dev/challenges/what-it-shows) now says
+source ticket #4471 closed on 5 October:
+
+| Cause | Engineering outcome | Evidence | GitHub closure |
+| --- | --- | --- | --- |
+| parser | FIXED | `fix(dates): parse dd/mm for eu locales` | completed |
+| hint | WON'T FIX | booking-v3 form retired | not planned |
+
+These are different resolutions. A retired form is not a repaired hint.
+The parser ticket closes as completed because engineering reports a fix; the hint ticket
+closes as not planned because the affected form was retired. Neither is a duplicate of
+the other.
+
+The first closure incorrectly marked both tickets completed. The hint ticket was reopened
+and reclosed with the correct reason, with the original history retained.
+The engineering update is the source of the outcome; this workspace did not execute or
+independently verify the production fix.
+
+## Keep the original report counts
+
+<CauseTable ticket={4471} issues={issueLinks} />
+
+The export is still the 4 October snapshot. Closing the tickets does not change those
+counts, rewrite the source merges, or establish that a retired form was fixed.
+The [signed cause review](/kb/decisions/0003-signed-4471-review) contains the deduplication
+method, tag disagreements, one-day-report caveat, timeline, and interactive counterexamples.
+The accepted decisions remain unchanged.
+
+## Desk follow-up
+
+The [active triage rule](/kb/triage/dedupe) still requires matching causes rather than
+matching subjects. For a new report, verify its actual form version and current engineering
+status before routing it; the historical classifier is not proof that booking-v3 still runs.
+Re-read the desk update before closing, because the export and an earlier submission do
+not freeze the desk's work.
+
+<RenderStamp {signature} />

@@ -44,6 +44,11 @@ updates active triage and incident guidance, and links the separate
 [hint](https://github.com/manojparvathaneni/mega-s01e03-what-it-shows/issues/1) tickets.
 The counts are for the exported snapshot, not today's queue.
 
+The subsequent [signed engineering resolution](src/routes/kb/incidents/4471-resolution/+page.svx)
+and its [rendered page](site/kb/incidents/4471-resolution/index.html) record the live desk update:
+parser fixed (completed), booking-v3 retired (hint not planned). The original counts and
+accepted decisions are retained.
+
 The desk-facing rendered page is committed at
 [`site/kb/decisions/0003-signed-4471-review/index.html`](site/kb/decisions/0003-signed-4471-review/index.html),
 alongside its CSS, JavaScript, and other rendered KB pages. This is actual Svelte/mdsvex
