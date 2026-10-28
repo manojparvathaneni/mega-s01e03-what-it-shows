@@ -1,0 +1,38 @@
+---
+layout: runbook
+title: '#4471 · dates parse mm/dd in eu locales'
+owner: support desk
+status: split
+reviewed: 2026-10-28
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import { issueLinks } from '#lib/kb/ticket-links';
+</script>
+
+Since April, people have told us their bookings land on the wrong day.
+The 4 October export records them merged into one source ticket, but the cause table
+distinguishes a shared-parser problem from a booking-v3 form-hint problem.
+
+<Callout>
+The old "one issue, one fix" conclusion was wrong. See the signed
+[review and replacement decision](/kb/decisions/0002-dedupe-by-cause).
+Separate GitHub tickets are linked below; neither production fix is verified here.
+</Callout>
+
+## What was merged
+
+<CauseTable ticket={4471} issues={issueLinks} />
+
+## Since April
+
+<QueueTimeline ticket={4471} />
+
+## Lessons
+
+- Deduplicate by report ID, then classify by tenant and channel evidence, not intake tags.
+- Merge only established matching causes; use the [current triage rule](/kb/triage/dedupe).
+- Read received and merged dates separately. A desk backlog merge is not a new onset.

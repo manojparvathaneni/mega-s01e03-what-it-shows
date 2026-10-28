@@ -1,0 +1,40 @@
+---
+layout: runbook
+title: 'Triage: duplicate reports'
+owner: support desk
+status: accepted
+reviewed: 2026-10-28
+---
+
+<script>
+  import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+</script>
+
+A busy morning brings hundreds of reports about the same thing. We keep one ticket per issue
+and merge every duplicate into it, so engineering sees one thread with a count.
+
+## The rule
+
+A report belongs with an open ticket when evidence establishes the **same cause**
+([decision 0002](/kb/decisions/0002-dedupe-by-cause), replacing the unchanged
+[decision 0001](/kb/decisions/0001-dedupe-by-subject)):
+
+1. read the report and look up its tenant, locale, booking-form version, and channel;
+2. for the known date causes, evaluate `causeOf` and check `sameCause`;
+3. merge only when the cause is established as the same; otherwise keep reports separate.
+
+<Callout>
+Matching subjects can hide different causes; different subjects can describe the same cause.
+Intake tags and browser locale are not substitutes for the tenant directory.
+</Callout>
+
+## Try it
+
+<DedupeExplorer />
+
+## When you are unsure
+
+Keep the report separate and request the missing evidence. An unknown tenant or unsupported
+case must not be merged on subject alone. The date classifier covers the known parser and
+hint problems, not every product handled by the desk.

@@ -1,0 +1,93 @@
+---
+layout: runbook
+title: '0002 · Split #4471 and deduplicate by cause'
+owner: manojparvathaneni
+status: accepted
+reviewed: 2026-10-28
+signature: 'manojparvathaneni / Copilot SDK'
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+  import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+  import ExportEvidence from '#lib/kb/ExportEvidence.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+  import { issueLinks } from '#lib/kb/ticket-links';
+</script>
+
+## Context
+
+This decision replaces [0001: duplicates share a subject line](/kb/decisions/0001-dedupe-by-subject).
+That accepted record remains unchanged as history. Its subject-only rule and the old
+incident prose conflict with the computed cause table and the dedupe explorer.
+The [current triage page](/kb/triage/dedupe) now uses the rule below.
+
+Scope: the support desk's export dated 4 October 2026, reviewed on 28 October.
+These are snapshot counts, not a claim about today's queue. Tables and charts run the
+exported logic against the data; they are not numbers copied from the old prose.
+
+## Split the merged ticket
+
+<CauseTable ticket={4471} issues={issueLinks} />
+
+**Parser:** the shared parser interprets input month first for day-first tenants.
+For example, Harbour Dental's app report R-41200 says 7 April became 4 July.
+The fix must respect the established tenant date contract on the app, email, and booking-v2
+form paths. [Parser ticket](https://github.com/manojparvathaneni/mega-s01e03-what-it-shows/issues/2).
+
+**Hint:** booking-v3 prints `MM/DD/YYYY`, but its form reads input using the day-first
+tenant convention. Following that hint changes the intended date.
+For example, Copper Studio's form report R-41230 describes 6 January becoming 1 June;
+intake incorrectly tagged it `parser`.
+Align the displayed hint and form input contract; a parser-only fix is not sufficient.
+[Hint ticket](https://github.com/manojparvathaneni/mega-s01e03-what-it-shows/issues/1).
+
+The export contains the cause model, not the production booking implementation.
+These tickets identify separate fixes and acceptance checks; they do not claim either
+production bug has been fixed. The source desk's #4471 is not an issue number in this repo.
+
+## Count what the evidence supports
+
+<ExportEvidence />
+
+<QueueTimeline ticket={4471} />
+
+The reports begin in April. Do not date the incident from the July merge spike, or treat
+the desk's "known" status as proof that all incoming reports share one cause.
+
+## Decision: same cause, not same subject
+
+1. Deduplicate export rows by report ID. A new customer report is not an export duplicate.
+2. Read the report and resolve its tenant in the directory. Use the tenant's locale and
+   booking-form version, not the reporter's browser locale.
+3. Use `dayFirst` and `causeOf` from `src/lib/kb/causes.ts`. For a known day-first tenant,
+   booking-v3 **form** reports are `hint`; app/email and booking-v2 form reports are `parser`.
+4. Merge only after establishing the same cause. Subject equality is neither necessary nor
+   sufficient. `sameCause` is a guard for these known causes, not a universal classifier for
+   every product the support desk handles.
+5. Unknown tenant, unsupported locale, or unclear behavior: keep the report separate and
+   request evidence. Do not merge on a matching subject or silently call it `parser`.
+
+## Check the rule while the desk keeps working
+
+<DedupeExplorer />
+
+Different subjects can share a cause: Kettle Books app and email reports belong together.
+Identical subjects can hide different causes: Alder Physio form versus app, or Copper
+Studio form versus Morrow Tax form, must stay apart.
+Different subjects on Pale Harbour and Alder Physio forms share the hint cause.
+An unknown sender must remain unresolved even when both subjects match.
+
+## Consequences and follow-up
+
+- Engineering gets a separate ticket and report count for each cause, not one broad symptom.
+- Triage must look up tenant and channel evidence; it cannot safely merge from subjects alone.
+- The source export still records its old merges. These replacement GitHub tickets do not
+  rewrite the source ticket system.
+- Rebuild and review when reports or tenant settings change. Do not silently mix new queue
+  totals with this dated snapshot; recheck classification and ticket counts.
+- Read the rendered KB, including its stale banners, tables, explorer, and chart, before
+  relying on prose. The old policy was accepted but stale; acceptance is not freshness.
+
+<RenderStamp {signature} />
