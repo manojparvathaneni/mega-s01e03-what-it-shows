@@ -19,7 +19,7 @@ distinguishes a shared-parser problem from a booking-v3 form-hint problem.
 
 <Callout>
 The old "one issue, one fix" conclusion was wrong. See the signed
-[review and replacement decision](/kb/decisions/0002-dedupe-by-cause).
+[review and replacement decision](/kb/decisions/0003-signed-4471-review).
 Separate GitHub tickets are linked below; neither production fix is verified here.
 </Callout>
 

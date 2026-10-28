@@ -14,9 +14,9 @@ const tenants = readdirSync(new URL('../src/lib/data/tenants/', import.meta.url)
   .map((file) => JSON.parse(read(`../src/lib/data/tenants/${file}`)));
 const tenantOf = (report) => tenants.find((tenant) => tenant.handle === report.tenant);
 const groups = groupByCause(reports, tenantOf);
-const decisionPath = '../src/routes/kb/decisions/0002-dedupe-by-cause/+page.svx';
+const decisionPath = '../src/routes/kb/decisions/0003-signed-4471-review/+page.svx';
 const decision = read(decisionPath);
-const html = read('../site/kb/decisions/0002-dedupe-by-cause/index.html');
+const html = read('../site/kb/decisions/0003-signed-4471-review/index.html');
 const text = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ');
 
 test('overlapping export rows do not inflate unique report counts', () => {
@@ -113,12 +113,20 @@ test('accepted decision 0001 stays byte-for-byte unchanged', () => {
   );
 });
 
+test('accepted decision 0002 stays unchanged when the signed replacement is issued', () => {
+  const original = read('../src/routes/kb/decisions/0002-dedupe-by-cause/+page.svx');
+  assert.equal(
+    createHash('sha256').update(original).digest('hex'),
+    'a029384c9624fccbec3712c81b6096b32a3f7654e4b6bf66a4f2b68c06b3a1bf',
+  );
+});
+
 test('active KB routes and index point the working desk at the replacement decision', () => {
   const triage = read('../site/kb/triage/dedupe/index.html').replace(/<[^>]*>/g, ' ');
   assert.match(triage, /same cause/);
   assert.ok(!triage.includes('Merge. Splitting a ticket later'));
   const index = read('../site/kb/index.html');
-  assert.ok(index.includes('/kb/decisions/0002-dedupe-by-cause'));
+  assert.ok(index.includes('/kb/decisions/0003-signed-4471-review'));
   const incident = read('../site/kb/incidents/4471/index.html');
   for (const url of Object.values(issueLinks)) assert.ok(incident.includes(url));
 });

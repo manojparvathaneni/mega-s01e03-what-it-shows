@@ -38,14 +38,14 @@ Exported 2026-10-04 from the `support` repo, `apps/kb/` → `src/`.
 ## S01E03 review
 
 This public course workspace preserves the supplied report/tenant data and accepted
-decision 0001. It adds a signed [replacement decision](src/routes/kb/decisions/0002-dedupe-by-cause/+page.svx),
+decisions 0001 and 0002. It adds a course-signed [replacement decision](src/routes/kb/decisions/0003-signed-4471-review/+page.svx),
 updates active triage and incident guidance, and links the separate
 [parser](https://github.com/manojparvathaneni/mega-s01e03-what-it-shows/issues/2) and
 [hint](https://github.com/manojparvathaneni/mega-s01e03-what-it-shows/issues/1) tickets.
 The counts are for the exported snapshot, not today's queue.
 
 The desk-facing rendered page is committed at
-[`site/kb/decisions/0002-dedupe-by-cause/index.html`](site/kb/decisions/0002-dedupe-by-cause/index.html),
+[`site/kb/decisions/0003-signed-4471-review/index.html`](site/kb/decisions/0003-signed-4471-review/index.html),
 alongside its CSS, JavaScript, and other rendered KB pages. This is actual Svelte/mdsvex
 output, including computed tables, the timeline, the interactive explorer, and the desk
 reference derived from the signature.
@@ -61,6 +61,6 @@ npm test
 npm run preview -- --port 4173
 ```
 
-Open `http://127.0.0.1:4173/kb/decisions/0002-dedupe-by-cause/`.
+Open `http://127.0.0.1:4173/kb/decisions/0003-signed-4471-review/`.
 The generated site uses root-relative URLs, so serve it over HTTP rather than opening
 the HTML through `file://`. No model calls, API keys, or production booking code are used.

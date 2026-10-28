@@ -1,0 +1,99 @@
+---
+layout: runbook
+title: '0003 · Signed #4471 review and cause-based triage'
+owner: manojparvathaneni
+status: accepted
+reviewed: 2026-10-28
+signature: 'v1.eyJzdWIiOiIzMzc3IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyMjQzOTgsImV4cCI6MTc5MzMxMDc5OH0.Smb7POdVwEMUGi65fawQ_QioOIOoxb49CIEZbWQ-Y4o'
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+  import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+  import ExportEvidence from '#lib/kb/ExportEvidence.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+  import { issueLinks } from '#lib/kb/ticket-links';
+</script>
+
+## Context and authority
+
+This record replaces [0002](/kb/decisions/0002-dedupe-by-cause) with a review signed using
+the course-issued page proof. The classification and triage decision are unchanged.
+Accepted records 0001 and 0002 remain byte-for-byte unchanged as history.
+The [active triage page](/kb/triage/dedupe) points here.
+
+The original [subject-only decision](/kb/decisions/0001-dedupe-by-subject) was accepted but
+stale: its rendered page warns that nobody has reviewed it for more than half a year.
+The incident's "one issue, one fix" prose contradicted the computed cause table.
+Read the rendered evidence, not just its Markdown or the word "known".
+
+Scope: the support desk's export dated 4 October 2026, reviewed on 28 October.
+Counts below describe that snapshot, not today's queue. Rebuild when data changes.
+
+## Separate problems and tickets
+
+<CauseTable ticket={4471} issues={issueLinks} />
+
+**Parser:** the shared parser reads month first for day-first tenants.
+Harbour Dental's app report R-41200 says 7 April became 4 July.
+The app/email and booking-v2 form paths must honor the established tenant date contract.
+[Parser ticket](https://github.com/manojparvathaneni/mega-s01e03-what-it-shows/issues/2).
+
+**Hint:** booking-v3 displays `MM/DD/YYYY`, but reads form input using the day-first
+tenant convention. A person following the hint gets a different date.
+Copper Studio's form report R-41230 describes 6 January becoming 1 June;
+intake tagged it `parser`, but it belongs to `hint`.
+Align the hint and the form input contract independently of the shared-parser fix.
+[Hint ticket](https://github.com/manojparvathaneni/mega-s01e03-what-it-shows/issues/1).
+
+The exported cause model is not the production booking implementation.
+These tickets specify separate fixes and acceptance checks; neither production fix has
+been verified here. Source support ticket #4471 is not an issue number in this repo.
+
+## Count and chronology
+
+<ExportEvidence />
+
+<QueueTimeline ticket={4471} />
+
+Reports begin in April. The July merge spike is desk backlog activity, not the onset of a
+new problem. Received dates and merged dates answer different questions.
+The one-day descriptions remain visible in the computed evidence; they do not establish
+an additional timezone cause.
+
+## Decision: merge only established matching causes
+
+1. Deduplicate overlapping export rows by report ID before counting reports.
+2. Read the report and resolve its tenant, locale, booking-form version, and channel.
+   Do not substitute `meta.intakeTag`, browser locale, or subject text for tenant evidence.
+3. Use `dayFirst` and `causeOf` from `src/lib/kb/causes.ts`. For known day-first tenants,
+   booking-v3 **form** reports are `hint`; app/email and booking-v2 form reports are `parser`.
+4. Merge only when the evidence establishes the same cause. A matching subject is neither
+   necessary nor sufficient. `sameCause` covers these known date causes, not every product
+   handled by the support desk.
+5. Unknown tenant, unsupported locale, or unclear behavior: keep the report separate and
+   request evidence. Do not silently classify it as `parser` or merge it on subject alone.
+
+## Check the active rule
+
+<DedupeExplorer />
+
+- Kettle Books app and email reports: different subjects, same parser cause; merge.
+- Alder Physio form versus app: same subject, different causes; keep apart.
+- Copper Studio form versus Morrow Tax form: same subject, different causes; keep apart.
+- Pale Harbour and Alder Physio forms: different subjects, same hint cause; merge.
+- Unknown sender: matching subjects do not establish a cause; keep unresolved.
+
+## Consequences
+
+Engineering gets one ticket per cause with its own report count. Triage now requires a
+tenant lookup and a reading of the report rather than a subject-only shortcut.
+The working desk's triage and incident pages point here, so the old merge rule is not left
+as active guidance.
+
+The exported data still contains the original merges. Filing these GitHub tickets does
+not rewrite the source ticket system. New reports or tenant changes require a fresh
+classification and review; do not mix live queue totals into this dated snapshot.
+
+<RenderStamp {signature} />

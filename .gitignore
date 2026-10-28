@@ -2,3 +2,4 @@ node_modules/
 .svelte-kit/
 .env
 .DS_Store
+course-log.jsonl
